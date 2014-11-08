@@ -8,19 +8,21 @@ class Solution:
         end = len(num) - 1
             
         while begin < end:
+            if num[begin] < num[end]:
+                return num[begin]
+
             mid = (begin + end) / 2
-            print mid
-            if num[mid] < num[end]:
-                end = mid
-            elif num[mid] > num[end]:
+            if num[begin] < num[mid]:
                 begin = mid + 1
+            elif num[begin] > num[mid]:
+                end = mid
             else:
-                end -= 1
+                begin += 1
 
         return num[begin]
 
 def main():
-    test = [1, 1, 5, 1]
+    test = [1, 1]
     ans = Solution().findMin(test)
     print ans
 

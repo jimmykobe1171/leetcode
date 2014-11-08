@@ -63,6 +63,7 @@ class Solution:
         ans = bs(target, A, 0, len(A)-1)
         return ans
 
+    # not duplicated value
     def search_for_rotation_pivot(self, A):
         ans = -1
         begin = 0
