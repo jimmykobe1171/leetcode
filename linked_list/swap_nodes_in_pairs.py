@@ -26,33 +26,7 @@ class Solution:
             current_node = current_node.next.next
 
         return first_node.next
-
-        # if head is None:
-        #     return head
-
-        # node_1, node_2 = head, head.next
-        # p_node = None
-        # if node_2 is not None:
-        #     head = node_2
-
-        # while node_2 is not None:
-        #     # swap node 1 and node 2
-        #     node_3 = node_2.next
-        #     node_1.next = node_3
-        #     node_2.next = node_1
-        #     if p_node:
-        #         p_node.next = node_2
-        #         p_node = node_1
-        #     else:
-        #         p_node = node_1
-        #     # step to next node pair
-        #     if node_1.next is not None:
-        #         node_1 = node_1.next
-        #         node_2 = node_1.next
-        #     else:
-        #         break
-
-        # return head
+        
 
 def loop_linked_list(head):
     while head is not None:
