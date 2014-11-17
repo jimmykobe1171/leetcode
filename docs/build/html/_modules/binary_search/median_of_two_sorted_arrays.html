@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>binary_search.median_of_two_sorted_arrays &mdash; leetcode 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="leetcode 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="binary_search" href="../binary_search.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">leetcode 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../binary_search.html" accesskey="U">binary_search</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for binary_search.median_of_two_sorted_arrays</h1><div class="highlight"><pre>
+<span class="c"># leetcode Median of Two Sorted Arrays O(log(m+m))</span>
+
+<div class="viewcode-block" id="Solution"><a class="viewcode-back" href="../../binary_search.html#binary_search.median_of_two_sorted_arrays.Solution">[docs]</a><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="c"># @return a float</span>
+<div class="viewcode-block" id="Solution.findMedianSortedArrays"><a class="viewcode-back" href="../../binary_search.html#binary_search.median_of_two_sorted_arrays.Solution.findMedianSortedArrays">[docs]</a>    <span class="k">def</span> <span class="nf">findMedianSortedArrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+        <span class="n">MAX</span> <span class="o">=</span> <span class="mi">100000000</span>
+        <span class="n">MIN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100000000</span>
+        <span class="k">def</span> <span class="nf">find_kth_sorted_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">begin_a</span><span class="p">,</span> <span class="n">end_a</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">begin_b</span><span class="p">,</span> <span class="n">end_b</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+            <span class="c"># print A, begin_a, end_a, B, begin_b, end_b, k</span>
+            <span class="k">if</span> <span class="n">begin_a</span> <span class="o">&gt;</span> <span class="n">end_a</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">B</span><span class="p">[</span><span class="n">begin_b</span><span class="o">+</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">begin_b</span> <span class="o">&gt;</span> <span class="n">end_b</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="n">begin_a</span><span class="o">+</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c"># here we must maintain the invariant: i + j -1 = k</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">k</span><span class="o">/</span><span class="mi">2</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="c"># print i, j</span>
+            <span class="c"># edge case checking</span>
+            <span class="n">A_i</span> <span class="o">=</span> <span class="n">MAX</span> <span class="k">if</span> <span class="n">end_a</span> <span class="o">-</span> <span class="n">begin_a</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="k">else</span> <span class="n">A</span><span class="p">[</span><span class="n">begin_a</span><span class="o">+</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">B_j</span> <span class="o">=</span> <span class="n">MAX</span> <span class="k">if</span> <span class="n">end_b</span> <span class="o">-</span> <span class="n">begin_b</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="k">else</span> <span class="n">B</span><span class="p">[</span><span class="n">begin_b</span><span class="o">+</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">A_i_1</span> <span class="o">=</span> <span class="n">MIN</span>
+            <span class="k">elif</span> <span class="n">end_a</span> <span class="o">-</span> <span class="n">begin_a</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">A_i_1</span> <span class="o">=</span> <span class="n">MAX</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">A_i_1</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">begin_a</span><span class="o">+</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">B_j_1</span> <span class="o">=</span> <span class="n">MIN</span>
+            <span class="k">elif</span> <span class="n">end_b</span> <span class="o">-</span> <span class="n">begin_b</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">B_j_1</span> <span class="o">=</span> <span class="n">MAX</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">B_j_1</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">begin_b</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c"># A_i_1 = MIN if i-1 &lt; 0 else A[begin_a+i-1]</span>
+            <span class="c"># B_j_1 = MIN if j-1 &lt; 0 else B[begin_b+j-1]</span>
+            <span class="c"># found k</span>
+            <span class="k">if</span> <span class="n">B_j_1</span> <span class="o">&lt;=</span> <span class="n">A_i</span> <span class="ow">and</span> <span class="n">A_i</span> <span class="o">&lt;=</span> <span class="n">B_j</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">A_i</span>
+            <span class="k">elif</span> <span class="n">A_i_1</span> <span class="o">&lt;=</span> <span class="n">B_j</span> <span class="ow">and</span> <span class="n">B_j</span> <span class="o">&lt;=</span> <span class="n">A_i</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">B_j</span>
+            <span class="c"># not found k</span>
+            <span class="k">if</span> <span class="n">A_i</span> <span class="o">&lt;=</span> <span class="n">B_j</span><span class="p">:</span>
+                <span class="c"># exclude A[begin_a] to A[begin_a+i]</span>
+                <span class="c"># exclued B[begin_b+j] to B[end_b]</span>
+                <span class="n">begin_a</span> <span class="o">+=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">end_b</span> <span class="o">=</span> <span class="n">end_b</span> <span class="k">if</span> <span class="n">B_j_1</span> <span class="o">==</span> <span class="n">MAX</span> <span class="k">else</span>  <span class="n">begin_b</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span>
+                <span class="k">return</span> <span class="n">find_kth_sorted_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">begin_a</span><span class="p">,</span> <span class="n">end_a</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">begin_b</span><span class="p">,</span> <span class="n">end_b</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">B_j</span> <span class="o">&lt;=</span> <span class="n">A_i</span><span class="p">:</span>
+                <span class="c"># exclude B[begin_b] to B[begin_b+j]</span>
+                <span class="c"># exclued A[begin_a+i] to A[end_a]</span>
+                <span class="n">end_a</span> <span class="o">=</span> <span class="n">end_a</span> <span class="k">if</span> <span class="n">A_i_1</span> <span class="o">==</span> <span class="n">MAX</span> <span class="k">else</span> <span class="n">begin_a</span><span class="o">+</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span>
+                <span class="n">begin_b</span> <span class="o">+=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+                <span class="k">return</span> <span class="n">find_kth_sorted_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">begin_a</span><span class="p">,</span> <span class="n">end_a</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">begin_b</span><span class="p">,</span> <span class="n">end_b</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">))</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">find_kth_sorted_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">find_kth_sorted_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="mf">2.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">find_kth_sorted_arrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="c"># print k</span>
+        <span class="k">return</span> <span class="n">ans</span>
+</div></div>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../binary_search.html#binary_search.median_of_two_sorted_arrays.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c"># A = [2]</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c"># B = [1]</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">findMedianSortedArrays</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">ans</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">leetcode 0.0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../binary_search.html" >binary_search</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Jimmy Cheung.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
