@@ -8,6 +8,14 @@ Welcome to leetcode's documentation!
 
 Contents:
 
+.. automodule:: binary_search
+
+divide_two_integers
+=========================
+
+.. automodule:: binary_search.divide_two_integers
+   :members:
+
 .. toctree::
    :maxdepth: 2
 
