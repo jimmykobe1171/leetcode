@@ -1,3 +1,12 @@
+"""
+.. module:: divide_two_integers
+   :platform: Unix, Windows
+   :synopsis: A useful module indeed.
+
+.. moduleauthor:: Jimmy Cheung <jimmykobe1171@126.com>
+
+
+"""
 # Divide Two Integers 
 
 class Solution:
