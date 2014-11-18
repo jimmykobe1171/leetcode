@@ -1,4 +1,4 @@
-linked_list package
+linked_list
 ===================
 
 

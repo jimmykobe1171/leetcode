@@ -9,9 +9,10 @@ Welcome to leetcode's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   modules
+   binary_search
+   linked_list
 
 
 Indices and tables

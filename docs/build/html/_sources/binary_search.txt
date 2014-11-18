@@ -1,4 +1,4 @@
-binary_search package
+binary_search
 =====================
 
 
