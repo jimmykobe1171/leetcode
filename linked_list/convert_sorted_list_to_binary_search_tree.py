@@ -37,7 +37,7 @@ class Solution:
 
         # construct bst
         def construct_bst(node, start, end):
-            # print start, end
+            print start, end
             if start > end:
                 return None
             mid = (start + end) / 2
@@ -45,11 +45,12 @@ class Solution:
             parent = TreeNode(node.val)
             parent.left = left_child
             # print 'node val:', parent.val
-            print 'before node:', node.val
+            # print 'before node:', node.val
             node = node.next
-            print 'after node:', node.val
+            # print 'after node:', node.val
 
             parent.right = construct_bst(node, mid+1, end)
+            print '!!!!!!!!!!!!!'
             print start, end
 
             print 'parent: %d, left: %s, right:%s' %(parent.val, str(parent.left), str(parent.right))
