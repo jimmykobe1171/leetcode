@@ -2,14 +2,6 @@ binary_search
 =============
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 4
 
    binary_search
-
-linked_list
-===========
-
-.. toctree::
-   :maxdepth: 1
-
-   linked_list

@@ -1,6 +1,6 @@
 """
 **Problem description:**
-  *two integers without using multiplication, division and mod operator.*
+    two integers without using multiplication, division and mod operator.
 
 """
 # Divide Two Integers 
