@@ -30,35 +30,28 @@ class Solution:
         while next_node:
             count += 1
             next_node = next_node.next
-        if count == 0 or count == 1:
+        if count == 0:
             return head
-
-        # print 'length:', count 
+        elif count == 1:
+            return TreeNode(head.val)
 
         # construct bst
         def construct_bst(node, start, end):
-            print start, end
+            # print start, end
             if start > end:
-                return None
+                return None, node
+
             mid = (start + end) / 2
-            left_child = construct_bst(node, start, mid-1)
+            left_child, node = construct_bst(node, start, mid-1)
             parent = TreeNode(node.val)
             parent.left = left_child
-            # print 'node val:', parent.val
-            # print 'before node:', node.val
             node = node.next
-            # print 'after node:', node.val
+            parent.right, node = construct_bst(node, mid+1, end)
 
-            parent.right = construct_bst(node, mid+1, end)
-            print '!!!!!!!!!!!!!'
-            print start, end
+            return parent, node
 
-            print 'parent: %d, left: %s, right:%s' %(parent.val, str(parent.left), str(parent.right))
-            print 'node val:', node.val
-
-            return parent
-
-        return construct_bst(head, 0, count-1)
+        parent, node = construct_bst(head, 0, count-1)
+        return parent
 
 
 def inorder_traverse(node):
@@ -73,14 +66,15 @@ def main():
     node_1 = ListNode(1)
     node_2 = ListNode(2)
     node_3 = ListNode(3)
-    node_4 = ListNode(4)
+    # node_4 = ListNode(4)
     node_1.next = node_2
     node_2.next = node_3
-    node_3.next = node_4
+    # node_3.next = node_4
+    # node_1 = None
 
     ans = Solution().sortedListToBST(node_1)
     # print ans
-    # inorder_traverse(ans)
+    inorder_traverse(ans)
 
 if __name__ == '__main__':
     main()
