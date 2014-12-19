@@ -16,8 +16,8 @@ class Solution:
     # @return a tree node
     def sortedArrayToBST(self, num):
         def array_to_bst(array, begin, end):
-            if begin >= end:
-                return TreeNode(array[begin])
+            if begin > end:
+                return None
 
             mid = (begin + end) / 2
             mid_node = TreeNode(array[mid])
